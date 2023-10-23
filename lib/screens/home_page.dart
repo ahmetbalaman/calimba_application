@@ -18,6 +18,23 @@ class CalimaModel {
 }
 
 class _HomePageState extends State<HomePage> {
+    final List<String> notesData = [
+      "1.Kısım",
+    "1' 1' 7 7 6 6 7 5",
+    "1' 1' 7 7 6 6 6",
+    "1' 1' 7 7 6 6 7 5",
+    "1' 1' 7 7 6 6 6",
+    "5 6 7 1' 2' 1' 2' 1' 7",
+  ];
+    final List<String> notesData2 = [
+      "2.Kısım",
+    "1' 7 6 2' 2' 2' 1' 7",
+    "1' 1' 7 7 6 6 6",
+    "5 6 7 1' 2' 1' 2' 1' 2' 1' 7",
+    "1' 7 6 2' 2' 2' 1' 7",
+    "1' 1' 7 7 6 6 6",
+  ];
+
   List<CalimaModel> kalimbaTelleri = [
        CalimaModel(no: "2dotdot", dotNumber:2, height: 800),
         CalimaModel(no: "7dot", dotNumber: 1, height: 822),
@@ -118,18 +135,21 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: Row(
+            
+            Positioned(
+              top: 100,
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ...List.generate(
+                      children: 
+                        List.generate(
                           kalimbaTelleri.length,
                           (index) => KalimbaString(
                               dotNumber: kalimbaTelleri[index].dotNumber,
@@ -137,12 +157,18 @@ class _HomePageState extends State<HomePage> {
                                   kalimbaTelleri[index].height,
                               width: dynamicWidth * 0.06,
                               number: kalimbaTelleri[index].no.toString()),
-                        )
-                      ],
+                        ).toList()
+                      
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
+                 
+                  ],
+                ),
+              ),
+            ),
+            //Drawer icon
+              Positioned(
+                    bottom: 0,
+                    right: 20,
                     child: IconButton(
                         onPressed: () =>
                             _scaffoldKey.currentState?.openEndDrawer(),
@@ -151,45 +177,40 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.white,
                         )),
                   ),
-                ],
-              ),
-            ),
              Positioned(
               top: 0,
               left: 20,
               right: 20,
               child: Container(
-              height: dynamicHeight*0.25,
-              color: Colors.grey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("KOYVERDUN GİTTUN BENİ",style: Theme.of(context).textTheme.headlineSmall,),
-                  FittedBox(
-                    fit: BoxFit.fitHeight,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                height: dynamicHeight*0.4,
+                padding: EdgeInsets.all(10),
+             decoration: BoxDecoration(
+color: Colors.brown.shade100,
+border: Border.all(width: 2),
+borderRadius: BorderRadius.all(Radius.circular(20))
+             ),
+              
+              child: FittedBox(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(child: Text("KOYVERDUN GİTTUN BENİ",style: Theme.of(context).textTheme.headlineSmall,)),
+                    Row(
+                      
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text("""
-                                    1' 1' 7 7 6 6 7 5\n
-                                    1' 1' 7 7 6 6 6\n
-                                    1'1' 7 7 6 6 7 5\n
-                                    1' 1' 7 7 6 6 6\n
-                                    5 6 7 1' 2' 1' 2' 1' 7\n
-                                    """,style: Theme.of(context).textTheme.titleLarge)
-                                    ,
-                                    Text("""
-                                    1' 7 6 2' 2' 2' 1' 7\n
-                                    1' 1' 7 7 6 6 6\n
-                                    5 6 7 1' 2' 1' 2' 1' 2' 1' 7\n
-                                    1' 7 6 2' 2' 2' 1' 7\n
-                                    1' 1' 7 7 6 6 6
-                                    """,style: Theme.of(context).textTheme.titleLarge,),
+                        
+                       Column(
+                        children:  List.generate(notesData.length, (index) => Text(notesData[index])).toList(),
+                       ),
+                         Column(
+                        children:  List.generate(notesData2.length, (index) => Text(notesData2[index])).toList(),
+                       ),
+                        
                       ],
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
             ),
